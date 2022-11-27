@@ -1,26 +1,75 @@
-import { Injectable } from '@nestjs/common';
-import { CreateSkillDto } from './dto/create-skill.dto';
+import { PrismaService } from './../prisma.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateSkillsDto } from './dto/create-skill.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
 
 @Injectable()
 export class SkillsService {
-  create(createSkillDto: CreateSkillDto) {
-    return 'This action adds a new skill';
+  constructor(private prismaService: PrismaService) {}
+  async create(createSkillsDto: any) {
+    try {
+      const skills = await this.prismaService.skills.create({
+        data: createSkillsDto
+      })
+
+      return skills
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  findAll() {
-    return `This action returns all skills`;
+  async findAll() {
+    try {
+      return await this.prismaService.skills.findMany()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} skill`;
+  async findOne(id: number) {
+    const skills = await this.prismaService.skills.findUnique({
+      where: {
+        id
+      }
+    })
+
+    if (!skills) {
+      throw new NotFoundException('Skills set not found')
+    }
+
+    return skills
   }
 
-  update(id: number, updateSkillDto: UpdateSkillDto) {
-    return `This action updates a #${id} skill`;
+  async update(id: number, updateSkillDto: UpdateSkillDto) {
+    await this.findOne(id)
+
+    try {
+      const skills = this.prismaService.skills.update({
+        where: {
+          id
+        },
+        data: {
+          ...updateSkillDto
+        }
+      })
+
+      return skills
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} skill`;
+  async remove(id: number) {
+    await this.findOne(id)
+
+    try {
+      await this.prismaService.skills.delete({
+        where: {
+          id
+        }
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 }

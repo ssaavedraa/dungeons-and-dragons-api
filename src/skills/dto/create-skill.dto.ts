@@ -1,1 +1,20 @@
-export class CreateSkillDto {}
+export class CreateSkillsDto {
+  acrobacies:number
+  athletism:number
+  arcaneKnowledge:number
+  cheat:number
+  history:number
+  interpretation:number
+  intimidation:number
+  investigation:number
+  handsGame:number
+  medicine:number
+  nature:number
+  perception:number
+  perspicacity:number
+  persuation:number
+  religion:number
+  stealth:number
+  survival:number
+  talkWithAnimals:number
+}

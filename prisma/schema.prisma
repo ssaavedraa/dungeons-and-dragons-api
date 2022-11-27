@@ -87,7 +87,7 @@ model Skills {
   handsGame Int
   medicine Int
   nature Int
-  preception Int
+  perception Int
   perspicacity Int
   persuation Int
   religion Int

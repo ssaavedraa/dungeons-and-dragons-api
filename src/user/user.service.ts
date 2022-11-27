@@ -9,7 +9,7 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto) {
     try {
-      const user = await this .prismaService.user.create({
+      const user = await this.prismaService.user.create({
         data: createUserDto
       })
 
@@ -86,7 +86,7 @@ export class UserService {
     await this.findOne(id)
 
     try {
-      this.prismaService.user.delete({
+      await this.prismaService.user.delete({
         where: {
           id
         }
