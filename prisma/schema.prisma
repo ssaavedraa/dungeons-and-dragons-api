@@ -35,7 +35,7 @@ model Character {
   armorClass Int
   health Int
   temporalHealth Int
-  passive_wisdom Int
+  passiveWisdom Int
   hitDice String
   attacksAndSpells String
   deathSaves String
