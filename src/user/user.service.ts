@@ -18,7 +18,7 @@ export class UserService {
       console.log(error)
 
       if (error.code === 'P2002') {
-        throw new BadRequestException('Username already taken, please selecta a new one')
+        throw new BadRequestException('Username already taken, please select a new one')
       }
 
       throw new InternalServerErrorException('Something went wrong, read server logs')
@@ -28,10 +28,10 @@ export class UserService {
   async findAll() {
     try {
       const users = await this.prismaService.user.findMany()
-  
+
       return users.map(user => {
         delete user.password
-  
+
         return user
       })
     } catch (error) {
@@ -74,7 +74,7 @@ export class UserService {
 
       return user
     } catch (error) {
-      console.log({error})
+      console.log(error)
 
       if (error.code === 'P2002') {
         throw new BadRequestException('Username already exist')
