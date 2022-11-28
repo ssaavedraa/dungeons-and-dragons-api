@@ -12,7 +12,7 @@ export class SkillsService {
         data: createSkillsDto
       })
 
-      return skills
+      return skills.id
     } catch (error) {
       console.log(error)
     }
